@@ -1,0 +1,498 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Bhavika Bhati | Interactive Resume</title>
+  <style>
+    :root {
+      --navy: #0b1f3a;
+      --navy-light: #12365f;
+      --blue: #2563eb;
+      --soft-blue: #eaf1ff;
+      --white: #ffffff;
+      --text: #1f2937;
+      --muted: #6b7280;
+      --line: #dbe3f0;
+      --shadow: 0 18px 45px rgba(11, 31, 58, 0.14);
+      --radius: 22px;
+    }
+
+    * {
+      box-sizing: border-box;
+      margin: 0;
+      padding: 0;
+    }
+
+    html {
+      scroll-behavior: smooth;
+    }
+
+    body {
+      font-family: "Segoe UI", Arial, sans-serif;
+      background: linear-gradient(135deg, #f7faff 0%, #edf3ff 100%);
+      color: var(--text);
+      line-height: 1.65;
+    }
+
+    a {
+      color: inherit;
+      text-decoration: none;
+    }
+
+    .navbar {
+      position: sticky;
+      top: 0;
+      z-index: 100;
+      background: rgba(11, 31, 58, 0.96);
+      backdrop-filter: blur(10px);
+      color: var(--white);
+      padding: 15px 8%;
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      box-shadow: 0 8px 24px rgba(11, 31, 58, 0.22);
+    }
+
+    .logo {
+      font-weight: 800;
+      letter-spacing: 0.7px;
+      font-size: 1.05rem;
+    }
+
+    .nav-links {
+      display: flex;
+      gap: 22px;
+      list-style: none;
+      font-size: 0.95rem;
+    }
+
+    .nav-links a {
+      opacity: 0.88;
+      transition: 0.25s ease;
+    }
+
+    .nav-links a:hover {
+      opacity: 1;
+      color: #bfdbfe;
+    }
+
+    .page {
+      width: min(1180px, 92%);
+      margin: 38px auto;
+      display: grid;
+      grid-template-columns: 330px 1fr;
+      gap: 28px;
+      align-items: start;
+    }
+
+    .sidebar {
+      position: sticky;
+      top: 88px;
+      background: var(--navy);
+      color: var(--white);
+      border-radius: var(--radius);
+      padding: 30px;
+      box-shadow: var(--shadow);
+      overflow: hidden;
+    }
+
+    .sidebar::before {
+      content: "";
+      position: absolute;
+      inset: -80px -70px auto auto;
+      width: 190px;
+      height: 190px;
+      background: rgba(37, 99, 235, 0.35);
+      border-radius: 50%;
+    }
+
+    .profile-pic {
+      width: 142px;
+      height: 142px;
+      border-radius: 50%;
+      border: 5px solid rgba(255, 255, 255, 0.7);
+      background: linear-gradient(135deg, #dbeafe, #ffffff);
+      display: grid;
+      place-items: center;
+      color: var(--navy);
+      font-size: 3rem;
+      font-weight: 800;
+      margin: 0 auto 18px;
+      position: relative;
+      z-index: 1;
+    }
+
+    .sidebar h1 {
+      text-align: center;
+      font-size: 1.75rem;
+      margin-bottom: 6px;
+      position: relative;
+      z-index: 1;
+    }
+
+    .role {
+      text-align: center;
+      color: #c7d2fe;
+      margin-bottom: 26px;
+      font-size: 0.95rem;
+      position: relative;
+      z-index: 1;
+    }
+
+    .contact-list,
+    .personal-list {
+      display: grid;
+      gap: 12px;
+      margin-top: 15px;
+      position: relative;
+      z-index: 1;
+    }
+
+    .contact-card {
+      background: rgba(255, 255, 255, 0.08);
+      border: 1px solid rgba(255, 255, 255, 0.14);
+      border-radius: 14px;
+      padding: 12px 13px;
+      transition: 0.25s ease;
+      word-break: break-word;
+    }
+
+    .contact-card:hover {
+      transform: translateY(-2px);
+      background: rgba(255, 255, 255, 0.14);
+    }
+
+    .side-heading {
+      margin-top: 26px;
+      font-size: 0.85rem;
+      text-transform: uppercase;
+      letter-spacing: 1.5px;
+      color: #bfdbfe;
+      position: relative;
+      z-index: 1;
+    }
+
+    .main {
+      display: grid;
+      gap: 22px;
+    }
+
+    .section {
+      background: var(--white);
+      border: 1px solid var(--line);
+      border-radius: var(--radius);
+      padding: 30px;
+      box-shadow: var(--shadow);
+      scroll-margin-top: 88px;
+    }
+
+    .section-title {
+      color: var(--navy);
+      font-size: 1.35rem;
+      margin-bottom: 18px;
+      display: flex;
+      align-items: center;
+      gap: 10px;
+    }
+
+    .section-title::before {
+      content: "";
+      width: 10px;
+      height: 30px;
+      border-radius: 20px;
+      background: var(--blue);
+    }
+
+    .hero {
+      background: linear-gradient(135deg, var(--navy), var(--navy-light));
+      color: var(--white);
+      border: none;
+    }
+
+    .hero h2 {
+      font-size: 2rem;
+      margin-bottom: 10px;
+    }
+
+    .hero p {
+      color: #dbeafe;
+      max-width: 760px;
+    }
+
+    .timeline {
+      display: grid;
+      gap: 18px;
+    }
+
+    .item {
+      border-left: 3px solid var(--blue);
+      padding-left: 18px;
+      position: relative;
+    }
+
+    .item::before {
+      content: "";
+      position: absolute;
+      left: -8px;
+      top: 8px;
+      width: 13px;
+      height: 13px;
+      background: var(--white);
+      border: 3px solid var(--blue);
+      border-radius: 50%;
+    }
+
+    .item h3 {
+      color: var(--navy);
+      font-size: 1.08rem;
+    }
+
+    .meta {
+      color: var(--muted);
+      font-size: 0.94rem;
+      margin-top: 2px;
+    }
+
+    .badge {
+      display: inline-block;
+      margin-top: 8px;
+      padding: 5px 11px;
+      border-radius: 999px;
+      background: var(--soft-blue);
+      color: var(--navy-light);
+      font-size: 0.82rem;
+      font-weight: 700;
+    }
+
+    .skill-controls {
+      display: flex;
+      gap: 10px;
+      flex-wrap: wrap;
+      margin-bottom: 18px;
+    }
+
+    .filter-btn {
+      border: none;
+      cursor: pointer;
+      padding: 10px 16px;
+      border-radius: 999px;
+      background: var(--soft-blue);
+      color: var(--navy);
+      font-weight: 700;
+      transition: 0.25s ease;
+    }
+
+    .filter-btn:hover,
+    .filter-btn.active {
+      background: var(--navy);
+      color: var(--white);
+      transform: translateY(-1px);
+    }
+
+    .skills-grid {
+      display: flex;
+      flex-wrap: wrap;
+      gap: 12px;
+    }
+
+    .skill {
+      padding: 11px 14px;
+      border: 1px solid var(--line);
+      border-radius: 14px;
+      background: #fbfdff;
+      font-weight: 650;
+      transition: 0.25s ease;
+    }
+
+    .skill small {
+      color: var(--muted);
+      font-weight: 700;
+      margin-left: 6px;
+    }
+
+    .skill.hide {
+      display: none;
+    }
+
+    .projects-grid {
+      display: grid;
+      grid-template-columns: repeat(2, minmax(0, 1fr));
+      gap: 16px;
+    }
+
+    .project-card {
+      border: 1px solid var(--line);
+      border-radius: 18px;
+      padding: 18px;
+      background: #fbfdff;
+      transition: 0.25s ease;
+    }
+
+    .project-card:hover {
+      transform: translateY(-4px);
+      box-shadow: 0 12px 28px rgba(11, 31, 58, 0.12);
+    }
+
+    .project-card h3 {
+      color: var(--navy);
+      margin-bottom: 8px;
+    }
+
+    footer {
+      text-align: center;
+      color: var(--muted);
+      padding: 20px 0 40px;
+      font-size: 0.9rem;
+    }
+
+    @media (max-width: 900px) {
+      .page {
+        grid-template-columns: 1fr;
+      }
+
+      .sidebar {
+        position: static;
+      }
+
+      .navbar {
+        flex-direction: column;
+        gap: 12px;
+      }
+
+      .nav-links {
+        justify-content: center;
+        flex-wrap: wrap;
+      }
+
+      .projects-grid {
+        grid-template-columns: 1fr;
+      }
+    }
+  </style>
+</head>
+<body>
+  <nav class="navbar">
+    <div class="logo">Bhavika Bhati</div>
+    <ul class="nav-links">
+      <li><a href="#objective">Objective</a></li>
+      <li><a href="#experience">Experience</a></li>
+      <li><a href="#education">Education</a></li>
+      <li><a href="#skills">Skills</a></li>
+      <li><a href="#projects">Projects</a></li>
+    </ul>
+  </nav>
+
+  <div class="page">
+    <aside class="sidebar">
+      <div class="profile-pic">BB</div>
+      <h1>Bhavika Bhati</h1>
+      <p class="role">Commerce Student | Fresher</p>
+
+      <h2 class="side-heading">Contact</h2>
+      <div class="contact-list">
+        <a class="contact-card" href="tel:+919549468233">📞 9549468233</a>
+        <a class="contact-card" href="mailto:bhavikabhati2419@gmail.">✉️ bhavikabhati2419@gmail.</a>
+        <div class="contact-card">📍 Near Mahalaxmi School, inside Jalori Gate, Jodhpur, Rajasthan</div>
+      </div>
+
+      <h2 class="side-heading">Personal Details</h2>
+      <div class="personal-list">
+        <div class="contact-card">Date of Birth: 30/10/2003</div>
+        <div class="contact-card">Marital Status: Single</div>
+      </div>
+    </aside>
+
+    <main class="main">
+      <section id="objective" class="section hero">
+        <h2>Hello, I am Bhavika.</h2>
+        <p>To work in an environment which encourages me to succeed and grow professionally, where I can utilize my skills and knowledge appropriately.</p>
+      </section>
+
+      <section id="experience" class="section">
+        <h2 class="section-title">Work Experience</h2>
+        <div class="timeline">
+          <div class="item">
+            <h3>Fresher</h3>
+            <p class="meta">Open to entry-level professional opportunities</p>
+            <span class="badge">Ready to Learn & Contribute</span>
+          </div>
+        </div>
+      </section>
+
+      <section id="education" class="section">
+        <h2 class="section-title">Education</h2>
+        <div class="timeline">
+          <div class="item">
+            <h3>Government College Chainpura, 1st Puliya, Jodhpur</h3>
+            <p class="meta">Bachelor Degree in Commerce - Pursuing</p>
+          </div>
+          <div class="item">
+            <h3>Kendriya Vidyalaya No. 1 (AFS), Jodhpur</h3>
+            <p class="meta">High School | 2020-21 | 84%</p>
+          </div>
+          <div class="item">
+            <h3>Vardhman Mahaveer Open University, Kota</h3>
+            <p class="meta">RSCIT | 2021 | 69%</p>
+          </div>
+        </div>
+      </section>
+
+      <section id="skills" class="section">
+        <h2 class="section-title">Skills</h2>
+        <div class="skill-controls">
+          <button class="filter-btn active" data-filter="all">All</button>
+          <button class="filter-btn" data-filter="advanced">Advanced</button>
+          <button class="filter-btn" data-filter="intermediate">Intermediate</button>
+        </div>
+
+        <div class="skills-grid">
+          <div class="skill" data-level="advanced">Quick Learner <small>Advanced</small></div>
+          <div class="skill" data-level="advanced">Hard Working <small>Advanced</small></div>
+          <div class="skill" data-level="advanced">Strong Work Ethic <small>Advanced</small></div>
+          <div class="skill" data-level="intermediate">Problem Solving <small>Intermediate</small></div>
+          <div class="skill" data-level="intermediate">Active Learner <small>Intermediate</small></div>
+        </div>
+      </section>
+
+      <section id="projects" class="section">
+        <h2 class="section-title">Projects</h2>
+        <div class="projects-grid">
+          <article class="project-card">
+            <h3>Interactive Resume Webpage</h3>
+            <p>A modern single-page resume website with smooth navigation, contact links, and skill filtering.</p>
+            <span class="badge">HTML • CSS • JavaScript</span>
+          </article>
+          <article class="project-card">
+            <h3>Academic / Portfolio Projects</h3>
+            <p>This section can be updated with college assignments, commerce projects, internship work, or certification projects.</p>
+            <span class="badge">To be updated</span>
+          </article>
+        </div>
+      </section>
+    </main>
+  </div>
+
+  <footer>
+    © 2026 Bhavika Bhati. Designed as an interactive resume webpage.
+  </footer>
+
+  <script>
+    const buttons = document.querySelectorAll(".filter-btn");
+    const skills = document.querySelectorAll(".skill");
+
+    buttons.forEach((button) => {
+      button.addEventListener("click", () => {
+        buttons.forEach((btn) => btn.classList.remove("active"));
+        button.classList.add("active");
+
+        const filter = button.dataset.filter;
+        skills.forEach((skill) => {
+          const matches = filter === "all" || skill.dataset.level === filter;
+          skill.classList.toggle("hide", !matches);
+        });
+      });
+    });
+  </script>
+</body>
+</html>
